@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Omniscola 🎓
 
-## Getting Started
+**Omniscola** é um sistema de gestão escolar moderno, desenvolvido especificamente para faculdades e cursos técnicos. O objetivo principal é simplificar a administração de turmas, alunos, presenças e notas através de uma interface intuitiva e uma arquitetura robusta e escalável.
 
-First, run the development server:
+## 🚀 Tecnologias
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este projeto utiliza o que há de mais moderno no ecossistema JavaScript/TypeScript:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+*   **UI Library:** [React 19](https://react.dev/)
+*   **Linguagem:** [TypeScript 5](https://www.typescriptlang.org/)
+*   **Estilização:** [Tailwind CSS 4](https://tailwindcss.com/)
+*   **Banco de Dados:** [SQLite](https://www.sqlite.org/)
+*   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Arquitetura
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto segue os princípios da **Clean Architecture**, garantindo uma separação clara de responsabilidades e facilitando a manutenção e evolução do sistema:
 
-## Learn More
+1.  **Modules (`src/modules/`)**: Contém a lógica de negócio central. Cada domínio (turmas, alunos, etc.) possui seus próprios:
+    *   `dtos/`: Objetos de transferência de dados.
+    *   `usecases/`: Regras de negócio puras.
+    *   `repository/`: Abstração do acesso ao banco de dados.
+2.  **Handlers (`src/handlers/`)**: Camada intermediária que processa requisições HTTP, trata erros de forma segura e comunica-se com os Use Cases.
+3.  **Hooks (`src/hooks/`)**: Custom Hooks que abstraem o consumo das APIs, fornecendo estados de carregamento, erro e dados tipados para o frontend.
+4.  **Shared (`src/shared/`)**: Tipos globais, utilitários e componentes compartilhados.
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 Módulos Atuais
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*   **Turmas:** Gestão de turmas por instituição, controle de períodos e códigos.
+*   **Alunos:** Cadastro completo de alunos e matrículas.
+*   **Presenças:** Controle de frequência por aula e por aluno.
+*   **Notas:** Lançamento e acompanhamento de avaliações e desempenhos.
+*   **Instituições:** Suporte a múltiplas instituições com licenciamento comercial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Como Rodar o Projeto
 
-## Deploy on Vercel
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/seu-usuario/omniscola.git
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    pnpm install
+    ```
+3.  **Configure o banco de dados:**
+    ```bash
+    pnpm drizzle-kit push
+    ```
+4.  **Inicie o servidor de desenvolvimento:**
+    ```bash
+    pnpm dev
+    ```
+5.  Acesse `http://localhost:3000` no seu navegador.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📈 Roadmap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Implementar módulo de Disciplinas/Matérias.
+- [ ] Finalizar interface visual (UI/UX) com Tailwind 4.
+- [ ] Implementar autenticação e níveis de acesso.
+- [ ] Gerador de relatórios e boletins em PDF.
+- [ ] Dashboard analítico para coordenadores.
+
+## 📄 Licença
+
+Comercial - Licença por instituição.
+
+---
+Desenvolvido com ❤️ para transformar a educação.
