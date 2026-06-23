@@ -43,10 +43,18 @@ export interface Presenca {
   status: 'presente' | 'ausente' | 'justificado';
 }
 
+export interface Disciplina {
+  id: string;
+  institutionId: string;
+  nome: string;
+  codigo: string;
+}
+
 export interface Nota {
   id: string;
   turmaId: string;
   alunoId: string;
+  disciplinaId: string; // Adicionado para vincular a nota a uma disciplina
   avaliacao: string;
   valor: number;
 }
@@ -55,16 +63,20 @@ export interface Nota {
 
 // Turmas
 export type CreateTurmaDTO = Omit<Turma, 'id'>;
-export type UpdateTurmaDTO = Partial<CreateTurmaDTO> & { id: string };
+export type UpdateTurmaDTO = Partial<Omit<Turma, 'id'>> & { id: string };
 
 // Alunos
 export type CreateAlunoDTO = Omit<Aluno, 'id'>;
-export type UpdateAlunoDTO = Partial<CreateAlunoDTO> & { id: string };
+export type UpdateAlunoDTO = Partial<Omit<Aluno, 'id'>> & { id: string };
 
 // Presenças
 export type CreatePresencaDTO = Omit<Presenca, 'id'>;
-export type UpdatePresencaDTO = Partial<CreatePresencaDTO> & { id: string };
+export type UpdatePresencaDTO = Partial<Omit<Presenca, 'id'>> & { id: string };
+
+// Disciplinas
+export type CreateDisciplinaDTO = Omit<Disciplina, 'id'>;
+export type UpdateDisciplinaDTO = Partial<Omit<Disciplina, 'id'>> & { id: string };
 
 // Notas
 export type CreateNotaDTO = Omit<Nota, 'id'>;
-export type UpdateNotaDTO = Partial<CreateNotaDTO> & { id: string };
+export type UpdateNotaDTO = Partial<Omit<Nota, 'id'>> & { id: string };

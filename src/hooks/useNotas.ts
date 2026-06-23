@@ -92,6 +92,10 @@ export const useNotas = (): UseNotasResult => {
         const errData = await response.json();
         throw new Error(errData.error || `Erro ao atualizar nota ${id}`);
       }
+      // Como a atualização pode não retornar um corpo, re-buscamos as notas para garantir consistência
+      // Ou você pode optar por atualizar o estado localmente se a API retornar o item atualizado
+      // fetchNotasByAluno(data.alunoId); // Se você tiver o alunoId disponível aqui
+      // fetchNotasByTurma(data.turmaId); // Se você tiver o turmaId disponível aqui
       return true;
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : `Erro desconhecido ao atualizar nota ${id}`);
