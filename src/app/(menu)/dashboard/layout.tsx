@@ -35,11 +35,11 @@ export default async function DashboardLayout({
             Visão geral
           </p>
           <Link
-            href="/dashboard"
-            className="flex items-center px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5"
-          >
-            Dashboard
-          </Link>
+  href="/"
+  className="flex items-center px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5"
+>
+  Dashboard
+</Link>
 
           <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">
             Minha turma

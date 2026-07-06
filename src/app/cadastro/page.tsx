@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState } from 'react';
 import { register } from '@/actions/auth';
 
@@ -46,9 +47,22 @@ export default function CadastroPage() {
             <input
               name="senha"
               type="password"
-              placeholder="Mínimo 6 caracteres"
+              placeholder="Minimo 6 caracteres"
               className="w-full border border-black/[.1] rounded-lg px-3 py-2 text-sm text-gray-800 outline-none focus:border-[#E8601C] transition-colors"
             />
+          </div>
+
+          <div>
+            <label className="text-xs text-gray-500 mb-1 block">Perfil</label>
+            <select
+              name="role"
+              className="w-full border border-black/[.1] rounded-lg px-3 py-2 text-sm text-gray-800 outline-none focus:border-[#E8601C] transition-colors"
+            >
+              <option value="professor">Professor</option>
+              <option value="admin">Administrador</option>
+              <option value="diretoria">Diretoria</option>
+              <option value="aluno">Aluno</option>
+            </select>
           </div>
 
           <button
@@ -61,8 +75,8 @@ export default function CadastroPage() {
         </form>
 
         <p className="text-center text-xs text-gray-400 mt-6">
-          Já tem conta?{' '}
-          <a href="/" className="text-[#E8601C] hover:underline">Entrar</a>
+          Ja tem conta?{' '}
+          <Link href="/" className="text-[#E8601C] hover:underline">Entrar</Link>
         </p>
       </div>
     </div>

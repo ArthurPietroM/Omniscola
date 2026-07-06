@@ -65,12 +65,14 @@ export async function register(state: AuthState, formData: FormData) {
 
   const passwordHash = await bcrypt.hash(senha, 10);
 
- const novoUsuario = {
+ const role = (formData.get('role') as string) || 'professor';
+
+const novoUsuario = {
   id: randomUUID(),
   nome,
   email,
   passwordHash,
-  role: 'professor' as const,
+  role: role as 'admin' | 'professor' | 'diretoria' | 'aluno',
   institutionId: institutionId || '8815ed0e-bea7-49d7-9174-027a1c137b0e',
   createdAt: new Date().toISOString(),
 };
