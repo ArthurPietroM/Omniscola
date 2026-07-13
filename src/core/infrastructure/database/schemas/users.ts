@@ -1,4 +1,4 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 import { institutions } from './institutions';
 
 export const users = sqliteTable('users', {
@@ -8,5 +8,6 @@ export const users = sqliteTable('users', {
   email:         text('email').notNull().unique(),
   passwordHash:  text('password_hash').notNull(),
   role:          text('role').notNull().default('professor'),
+  ativo:         integer('ativo', { mode: 'boolean' }).notNull().default(true),
   createdAt:     text('created_at').notNull(),
 });

@@ -35,6 +35,10 @@ export async function login(state: AuthState, formData: FormData) {
     return { erro: 'Credenciais inválidas' };
   }
 
+  if (!usuario.ativo) {
+  return { erro: 'Acesso bloqueado. Entre em contato com o administrador.' };
+}
+
   await createSession(usuario.id);
   redirect('/dashboard');
 }

@@ -13,7 +13,7 @@ export default async function MenuLayout({ children }: { children: React.ReactNo
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-52 bg-[#003B6F] flex flex-col shrink-0 fixed top-0 left-0 h-screen z-50">
+      <aside className="w-52 bg-[#003B6F] flex flex-col shrink-0">
         <div className="px-4 py-5 border-b border-white/10">
           <p className="text-white font-medium text-sm">Omniscola</p>
           <p className="text-white/40 text-xs mt-0.5">Gestão Escolar</p>
@@ -77,7 +77,7 @@ export default async function MenuLayout({ children }: { children: React.ReactNo
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col ml-52 bg-[#F5F6FA] min-h-screen">
+      <main className="flex-1 flex flex-col bg-[#F5F6FA] min-h-screen overflow-auto">
         {children}
       </main>
     </div>
