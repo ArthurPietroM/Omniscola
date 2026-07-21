@@ -59,7 +59,6 @@ export default function CadastroPage() {
               className="w-full border border-black/[.1] rounded-lg px-3 py-2 text-sm text-gray-800 outline-none focus:border-[#E8601C] transition-colors"
             >
               <option value="professor">Professor</option>
-              <option value="admin">Administrador</option>
               <option value="diretoria">Diretoria</option>
               <option value="aluno">Aluno</option>
             </select>
