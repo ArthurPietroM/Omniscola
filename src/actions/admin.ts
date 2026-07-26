@@ -7,6 +7,7 @@ import bcrypt from 'bcryptjs';
 import { revalidatePath } from 'next/cache';
 import { getSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
+import { randomUUID } from 'crypto';
 
 async function verificarAdmin() {
   const usuario = await getSession();
@@ -58,4 +59,46 @@ export async function toggleAtivoAction(id: string, ativo: boolean) {
   await verificarAdmin();
   await db.update(users).set({ ativo: !ativo }).where(eq(users.id, id));
   revalidatePath('/admin');
+}
+
+export async function criarUsuarioAction(state: AdminState, formData: FormData) {
+  await verificarAdmin();
+
+  const nome         = formData.get('nome') as string;
+  const email        = formData.get('email') as string;
+  const senha        = formData.get('senha') as string;
+  const role         = formData.get('role') as string;
+  const institutionId = formData.get('institutionId') as string;
+
+  if (!nome || !email || !senha) {
+    return { erro: 'Todos os campos são obrigatórios.' };
+  }
+
+  if (senha.length < 6) {
+    return { erro: 'Senha deve ter pelo menos 6 caracteres.' };
+  }
+
+  const existe = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  if (existe[0]) {
+    return { erro: 'Email já cadastrado.' };
+  }
+
+  const passwordHash = await bcrypt.hash(senha, 10);
+
+  try {
+    await db.insert(users).values({
+      id: randomUUID(),
+      nome,
+      email,
+      passwordHash,
+      role,
+      institutionId,
+      ativo: true,
+      createdAt: new Date().toISOString(),
+    });
+    revalidatePath('/admin');
+    return { sucesso: 'Usuário criado com sucesso!' };
+  } catch {
+    return { erro: 'Erro ao criar usuário.' };
+  }
 }

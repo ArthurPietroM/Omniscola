@@ -4,6 +4,7 @@ import { db } from '@/core/infrastructure/database';
 import { users } from '@/core/infrastructure/database/schemas/users';
 import { eq } from 'drizzle-orm';
 import AdminUserCard from '@/components/features/admin/AdminUserCard';
+import AdminNovoUsuario from '@/components/features/admin/AdminNovoUsuario';
 
 export default async function AdminPage() {
   const usuario = await getSession();
@@ -28,6 +29,8 @@ export default async function AdminPage() {
         </span>
       </div>
 
+      <AdminNovoUsuario institutionId={usuario.institutionId} />
+
       <div className="flex flex-col gap-3">
         {listaUsuarios.map((u) => (
           <AdminUserCard key={u.id} usuario={u} adminId={usuario.id} />
@@ -35,4 +38,4 @@ export default async function AdminPage() {
       </div>
     </div>
   );
-} 
+}

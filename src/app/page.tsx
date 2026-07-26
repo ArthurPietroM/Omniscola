@@ -48,11 +48,6 @@ export default function LoginPage() {
             {pending ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-
-        <p className="text-center text-xs text-gray-400 mt-6">
-          Primeira vez?{' '}
-          <a href="/cadastro" className="text-[#E8601C] hover:underline">Criar conta</a>
-        </p>
       </div>
     </div>
   );
