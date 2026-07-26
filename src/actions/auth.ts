@@ -77,7 +77,7 @@ const novoUsuario = {
   email,
   passwordHash,
   role: role as 'admin' | 'professor' | 'diretoria' | 'aluno',
-  institutionId: institutionId || '8815ed0e-bea7-49d7-9174-027a1c137b0e',
+  institutionId: institutionId || '3d3e136e-6e4d-451a-8175-f28da055bfb4',
   createdAt: new Date().toISOString(),
 };
 

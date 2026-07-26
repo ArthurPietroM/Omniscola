@@ -1,1 +1,0 @@
-ALTER TABLE `users` ADD `ativo` integer DEFAULT true NOT NULL;

@@ -1,8 +1,8 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { pgTable, text } from 'drizzle-orm/pg-core';
 import { institutions } from './institutions';
 import { disciplinas } from './disciplinas';
 
-export const turmas = sqliteTable('turmas', {
+export const turmas = pgTable('turmas', {
   id:           text('id').primaryKey(),
   institutionId: text('institution_id').notNull().references(() => institutions.id),
   disciplinaId:  text('disciplina_id').references(() => disciplinas.id),
