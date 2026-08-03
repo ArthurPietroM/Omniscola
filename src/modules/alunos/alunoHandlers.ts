@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { alunoUseCases } from '../modules/alunos/usecases';
-import { CreateAlunoDTO, UpdateAlunoDTO } from '../modules/alunos/dtos';
+import { alunoUseCases } from './usecases';
+import { CreateAlunoDTO, UpdateAlunoDTO } from './dtos';
 
 export const alunoHandler = {
   async listar() {

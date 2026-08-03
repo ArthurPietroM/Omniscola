@@ -1,38 +1,38 @@
 import { NextResponse } from 'next/server';
-import { notaUseCases } from '../modules/notas/usecases';
-import { CreateNotaDTO, UpdateNotaDTO } from '../modules/notas/dtos';
+import { disciplinaUseCases } from './usecases';
+import { CreateDisciplinaDTO, UpdateDisciplinaDTO } from './dtos';
 
-export const notaHandler = {
-  async listarPorTurma(turmaId: string) {
+export const disciplinaHandler = {
+  async listar() {
     try {
-      const notas = await notaUseCases.listarPorTurma(turmaId);
-      return NextResponse.json(notas, { status: 200 });
+      const disciplinas = await disciplinaUseCases.listar();
+      return NextResponse.json(disciplinas, { status: 200 });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido';
       return NextResponse.json({ error: message }, { status: 500 });
     }
   },
 
-  async listarPorAluno(alunoId: string) {
+  async buscarPorId(id: string) {
     try {
-      const notas = await notaUseCases.listarPorAluno(alunoId);
-      return NextResponse.json(notas, { status: 200 });
+      const disciplina = await disciplinaUseCases.buscarPorId(id);
+      return NextResponse.json(disciplina, { status: 200 });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido';
+      if (message.includes('não encontrada')) return NextResponse.json({ error: message }, { status: 404 });
       return NextResponse.json({ error: message }, { status: 500 });
     }
   },
 
-  async lancar(req: Request) {
+  async criar(req: Request) {
     try {
       const body = await req.json();
-      const data: CreateNotaDTO = body;
-      const nota = await notaUseCases.lancar(data);
-      return NextResponse.json(nota, { status: 201 });
+      const data: CreateDisciplinaDTO = body;
+      const disciplina = await disciplinaUseCases.criar(data);
+      return NextResponse.json(disciplina, { status: 201 });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido';
-      if (message.includes('obrigatório') || message.includes('entre 0 e 10'))
-        return NextResponse.json({ error: message }, { status: 400 });
+      if (message.includes('obrigatório')) return NextResponse.json({ error: message }, { status: 400 });
       return NextResponse.json({ error: message }, { status: 500 });
     }
   },
@@ -40,21 +40,23 @@ export const notaHandler = {
   async atualizar(req: Request, id: string) {
     try {
       const body = await req.json();
-      const data: UpdateNotaDTO = { ...body, id };
-      await notaUseCases.atualizar(data);
+      const data: UpdateDisciplinaDTO = { ...body, id };
+      await disciplinaUseCases.atualizar(data);
       return new NextResponse(null, { status: 204 });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido';
+      if (message.includes('não encontrada')) return NextResponse.json({ error: message }, { status: 404 });
       return NextResponse.json({ error: message }, { status: 500 });
     }
   },
 
   async deletar(id: string) {
     try {
-      await notaUseCases.deletar(id);
+      await disciplinaUseCases.deletar(id);
       return new NextResponse(null, { status: 204 });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido';
+      if (message.includes('não encontrada')) return NextResponse.json({ error: message }, { status: 404 });
       return NextResponse.json({ error: message }, { status: 500 });
     }
   }
