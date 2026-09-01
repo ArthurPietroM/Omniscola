@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { turmaUseCases } from '../modules/turmas/usecases';
-import { CreateTurmaDTO, UpdateTurmaDTO } from '../modules/turmas/dtos';
+import { turmaUseCases } from './usecases';
+import { CreateTurmaDTO, UpdateTurmaDTO } from './dtos';
 
 export const turmaHandler = {
   async listar() {

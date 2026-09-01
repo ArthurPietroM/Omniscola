@@ -8,11 +8,11 @@ type AlunoState = { erro?: string; sucesso?: boolean } | null;
 export async function criarAlunoAction(state: AlunoState, formData: FormData) {
   const nome = formData.get('nome') as string;
   const email = formData.get('email') as string;
-  const matricula = formData.get('matricula') as string;
   const institutionId = formData.get('institutionId') as string;
+  const matricula = formData.get('matricula') as string;
 
   try {
-    await alunoUseCases.criar({ nome, email, matricula, institutionId });
+    await alunoUseCases.criar({ nome, email, institutionId, matricula });
     revalidatePath('/alunos');
     return { sucesso: true };
   } catch (error) {
