@@ -1,7 +1,14 @@
 import { randomUUID } from 'crypto';
 import { alunoRepository } from '../repository';
 import { CreateAlunoDTO, UpdateAlunoDTO, AlunoResponseDTO } from '../dtos';
-import { gerarMatricula } from '../matricula';
+import { gerarCodigoMatricula } from '../matricula';
+
+function getPeriodoAtual(): string {
+  const agora = new Date();
+  const ano = agora.getFullYear();
+  const semestre = agora.getMonth() < 6 ? 1 : 2;
+  return `${ano}.${semestre}`;
+}
 
 export const alunoUseCases = {
 
@@ -19,7 +26,8 @@ export const alunoUseCases = {
     if (!data.nome) throw new Error('Nome do aluno é obrigatório');
     if (!data.email) throw new Error('Email do aluno é obrigatório');
 
-    const matricula = await gerarMatricula(data.institutionId);
+    const periodo = getPeriodoAtual();
+    const matricula = await gerarCodigoMatricula(data.institutionId, periodo);
 
     return await alunoRepository.create({
       ...data,
