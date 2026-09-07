@@ -8,8 +8,10 @@ export default async function MenuLayout({ children }: { children: React.ReactNo
   if (!usuario) redirect('/');
 
   const isAdmin = usuario.role === 'admin';
-  const isProfessor = usuario.role === 'professor';
   const isDiretoria = usuario.role === 'diretoria';
+  const isProfessor = usuario.role === 'professor';
+  const isAluno = usuario.role === 'aluno';
+  const isGestao = isAdmin || isDiretoria;
 
   return (
     <div className="flex min-h-screen">
@@ -20,34 +22,64 @@ export default async function MenuLayout({ children }: { children: React.ReactNo
         </div>
 
         <nav className="flex-1 px-2 py-3 overflow-y-auto">
-          <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pb-1">Visão geral</p>
           <Link href="/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
             Dashboard
           </Link>
 
-          {(isAdmin || isProfessor || isDiretoria) && (
+          {!isAluno && (
             <>
-              <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Gestão</p>
-              <Link href="/turmas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
-                Turmas
-              </Link>
-              <Link href="/alunos" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
-                Alunos
-              </Link>
+              <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Cadastro</p>
+              {isGestao && (
+                <>
+                  <Link href="/cadastro/alunos" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Alunos
+                  </Link>
+                  <Link href="/cadastro/cursos" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Cursos
+                  </Link>
+                  <Link href="/cadastro/disciplinas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Disciplinas
+                  </Link>
+                </>
+              )}
+
+              <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Gestão Educacional</p>
+              {isGestao && (
+                <>
+                  <Link href="/gestao/turmas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Turmas
+                  </Link>
+                  <Link href="/gestao/matriculas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Matrículas
+                  </Link>
+                  <Link href="/gestao/secretaria" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Secretaria
+                  </Link>
+                </>
+              )}
+
+              {(isProfessor || isAdmin) && (
+                <>
+                  <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Operação</p>
+                  <Link href="/presencas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Presenças
+                  </Link>
+                  <Link href="/notas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                    Notas
+                  </Link>
+                </>
+              )}
             </>
           )}
 
-          {(isAdmin || isProfessor) && (
+          {isAluno && (
             <>
-              <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Minha turma</p>
-              <Link href="/presencas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
-                Presenças
+              <p className="text-white/30 text-[10px] uppercase tracking-wider px-2 pt-3 pb-1">Meu Portal</p>
+              <Link href="/portal/turmas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                Minhas Turmas
               </Link>
-              <Link href="/notas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
-                Notas
-              </Link>
-              <Link href="/disciplinas" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
-                Disciplinas
+              <Link href="/portal/documentos" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 text-sm transition-colors mb-0.5">
+                Documentos
               </Link>
             </>
           )}

@@ -13,7 +13,7 @@ export async function criarAlunoAction(state: AlunoState, formData: FormData) {
 
   try {
     await alunoUseCases.criar({ nome, email, institutionId, matricula });
-    revalidatePath('/alunos');
+    revalidatePath('/cadastro/alunos');
     return { sucesso: true };
   } catch (error) {
     return { erro: error instanceof Error ? error.message : 'Erro ao cadastrar aluno' };

@@ -13,7 +13,7 @@ export async function criarTurmaAction(state: TurmaActionState, formData: FormDa
 
   try {
     await turmaUseCases.criar({ nome, codigo, periodo, institutionId });
-    revalidatePath('/(menu)/turmas');
+    revalidatePath('/gestao/turmas');
     return { sucesso: true };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Erro ao criar turma';

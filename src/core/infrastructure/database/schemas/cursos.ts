@@ -6,6 +6,7 @@ export const cursos = pgTable('cursos', {
   institutionId: text('institution_id').notNull().references(() => institutions.id),
   nome:          text('nome').notNull(),
   codigo:        text('codigo').notNull(),
+  codigoNumerico: text('codigo_numerico').notNull(), // ex: "01", "02" — usado na matrícula
   descricao:     text('descricao'),
   createdAt:     text('created_at').notNull(),
 });

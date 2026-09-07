@@ -12,7 +12,7 @@ export async function criarDisciplinaAction(state: DisciplinaState, formData: Fo
 
   try {
     await disciplinaUseCases.criar({ nome, codigo, institutionId });
-    revalidatePath('/disciplinas');
+    revalidatePath('/cadastro/disciplinas');
     return { sucesso: true };
   } catch (error) {
     return { erro: error instanceof Error ? error.message : 'Erro ao criar disciplina' };
