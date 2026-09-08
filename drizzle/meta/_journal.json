@@ -22,6 +22,13 @@
       "when": 1788823173022,
       "tag": "0002_volatile_talisman",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1788869915493,
+      "tag": "0003_parched_mac_gargan",
+      "breakpoints": true
     }
   ]
 }

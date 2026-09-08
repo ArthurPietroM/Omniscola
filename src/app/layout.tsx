@@ -9,7 +9,7 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: 'Omniscola | Gestão Escolar',
-  description: 'Sistema de Gestão Escolar Integrado - Senac',
+  description: 'Siste  de Gestão Escolar Integrado - Senac',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
