@@ -16,7 +16,10 @@ function gerarProtocolo(): string {
   return `${ano}.07.${seq}`;
 }
 
-export async function solicitarRequerimentoAction(formData: FormData) {
+export async function solicitarRequerimentoAction(
+  _prevState: { erro?: string } | null,
+  formData: FormData
+) {
   const usuario = await getSession();
   if (!usuario) redirect('/');
 
@@ -41,4 +44,6 @@ export async function solicitarRequerimentoAction(formData: FormData) {
 
   revalidatePath('/portal/documentos');
   revalidatePath('/gestao/secretaria/requerimentos');
+
+  return null; // Retorna null em caso de sucesso para manter a tipagem consistente
 }
