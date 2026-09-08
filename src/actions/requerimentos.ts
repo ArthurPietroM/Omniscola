@@ -46,4 +46,4 @@ export async function solicitarRequerimentoAction(
   revalidatePath('/gestao/secretaria/requerimentos');
 
   return { sucesso: true }; // Retorno com sucesso
-}g
+}
