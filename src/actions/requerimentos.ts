@@ -17,7 +17,7 @@ function gerarProtocolo(): string {
 }
 
 export async function solicitarRequerimentoAction(
-  _prevState: { erro?: string } | null,
+  _prevState: { erro?: string; sucesso?: boolean } | null,
   formData: FormData
 ) {
   const usuario = await getSession();
@@ -45,5 +45,5 @@ export async function solicitarRequerimentoAction(
   revalidatePath('/portal/documentos');
   revalidatePath('/gestao/secretaria/requerimentos');
 
-  return null; // Retorna null em caso de sucesso para manter a tipagem consistente
-}
+  return { sucesso: true }; // Retorno com sucesso
+}g
