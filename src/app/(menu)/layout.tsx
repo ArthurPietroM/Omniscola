@@ -109,7 +109,7 @@ export default async function MenuLayout({ children }: { children: React.ReactNo
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col bg-[#F5F6FA] min-h-screen overflow-auto">
+      <main className="flex-1 flex flex-col bg-[#F5F6FA] min-h-screen overflow-auto px-2">
         {children}
       </main>
     </div>
